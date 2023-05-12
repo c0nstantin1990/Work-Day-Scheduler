@@ -1,6 +1,6 @@
-// Loop through hours 9 to 11
+// Looping through hours 9 to 11
 for (var i = 9; i <= 11; i++) {
-  // Create time-block element
+// Creating time-block element
   var timeBlock = $("div").attr("id", `hour-${i}`).addClass("row time-block");
 }
 
@@ -14,14 +14,16 @@ if (i < currentHour) {
   timeBlock.addClass("future");
 }
 
-//Create hour element
+//Creating hour element
 var hour = $("<div>")
   .addClass("col-2 col-md-1 hour text-center py-3")
   .text(`${i}AM`);
 timeBlock.append(hour);
 
-//Create description element
+//Creating description element
 var description = $("<textarea>")
   .addClass("col-8 col-md-10 description")
   .attr("rows", "3");
 timeBlock.append(description);
+
+
