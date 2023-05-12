@@ -42,3 +42,9 @@ saveBtn.on("click", function () {
   var descriptionText = $(this).siblings(".description").val();
   localStorage.setItem(`hour-${i}-description`, descriptionText());
 });
+
+//Loading description from local storage
+var savedDescription = localStorage.getItem(`hour-${i}-description`);
+if (savedDescription) {
+  description.val(savedDescription);
+}
