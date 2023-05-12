@@ -1,52 +1,37 @@
-// Get container element
-var container = $(".container-lg");
-// Looping through hours 9 to 11
-for (var i = 9; i <= 11; i++) {
-  // Creating time-block element
-  var timeBlock = $("div").attr("id", `hour-${i}`).addClass("row time-block");
+//Wait for the dom to load before running the script
+$(document).ready(function () {
+  //Dispay current day & time in header
+  $("#currentDay").text(dayjs().format("dddd, MMMM D"));
 
-  //Determine past, present & future class
-  var currentHour = dayjs().hour();
-  if (i < currentHour) {
-    timeBlock.addClass("past");
-  } else if (i === currentHour) {
-    timeBlock.addClass("present");
-  } else {
-    timeBlock.addClass("future");
-  }
+  // Looping through each time block and update its color base on the current time
+  $(".time-block").each(function () {
+    // Creating time-block element
+    var currentHour = dayjs().hour();
+    var blockHour = parseInt($(this).attr("id").split("-")[1]);
 
-  //Creating hour element
-  var hour = $("<div>")
-    .addClass("col-2 col-md-1 hour text-center py-3")
-    .text(`${i}AM`);
-  timeBlock.append(hour);
+    //Determine past, present & future class
+    if (blockHour < currentHour) {
+      $(this).addClass("past");
+    } else if (blockHour === currentHour) {
+      $(this).addClass("present");
+    } else {
+      $(this).addClass("future");
+    }
+  });
+  //Save user input to local storage when button clicked
+  $("saveBtn").on("click", function () {
+    var input = $(this).siblings(".description").val().trim();
+    var time = $(this).parent().attr("id");
 
-  //Creating description element
-  var description = $("<textarea>")
-    .addClass("col-8 col-md-10 description")
-    .attr("rows", "3");
-  timeBlock.append(description);
+    localStorage.setItem(time, input);
+  });
+  //Load saved input from local storage
+  $(".description").each(function () {
+    var time = $(this).parent().attr("id");
+    var input = localStorage.getItem(time);
 
-  //Creating save button element
-  var saveBtn = $("<button>")
-    .addClass("btn saveBtn col-2 col-md-1")
-    .attr("aria-label", "save");
-  var saveIcon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
-  saveBtn.append(saveIcon);
-  timeBlock.append(saveBtn);
-
-  //Adding time-block element container
-  container.append(timeBlock);
-}
-
-//Adding click event listener to save button
-saveBtn.on("click", function () {
-  var descriptionText = $(this).siblings(".description").val();
-  localStorage.setItem(`hour-${i}-description`, descriptionText());
+    if (input !== null) {
+      $(this).val(input);
+    }
+  });
 });
-
-//Loading description from local storage
-var savedDescription = localStorage.getItem(`hour-${i}-description`);
-if (savedDescription) {
-  description.val(savedDescription);
-}
