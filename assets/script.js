@@ -1,3 +1,5 @@
+// Get container element
+var container = $(".container-lg");
 // Looping through hours 9 to 11
 for (var i = 9; i <= 11; i++) {
   // Creating time-block element
