@@ -1,6 +1,6 @@
 // Looping through hours 9 to 11
 for (var i = 9; i <= 11; i++) {
-// Creating time-block element
+  // Creating time-block element
   var timeBlock = $("div").attr("id", `hour-${i}`).addClass("row time-block");
 }
 
@@ -27,7 +27,9 @@ var description = $("<textarea>")
 timeBlock.append(description);
 
 //Creating save button element
-var saveBtn = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save");
+var saveBtn = $("<button>")
+  .addClass("btn saveBtn col-2 col-md-1")
+  .attr("aria-label", "save");
 var saveIcon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
 saveBtn.append(saveIcon);
 timeBlock.append(saveBtn);
@@ -35,3 +37,8 @@ timeBlock.append(saveBtn);
 //Adding time-block element container
 $(".container-lg").append(timeBlock);
 
+//Adding click event listener to save button
+saveBtn.on("click", function () {
+  var descriptionText = $(this).siblings(".description").val();
+  localStorage.setItem(`hour-${i}-description`, descriptionText());
+});
