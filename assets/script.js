@@ -5,7 +5,7 @@ for (var i = 9; i <= 11; i++) {
 }
 
 //Determine past, present & future class
-var currentHour = new Date().getHours();
+var currentHour = dayjs().hour();
 if (i < currentHour) {
   timeBlock.addClass("past");
 } else if (i === currentHour) {
@@ -15,5 +15,7 @@ if (i < currentHour) {
 }
 
 //Create hour element
-var hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${i}AM`)
+var hour = $("<div>")
+  .addClass("col-2 col-md-1 hour text-center py-3")
+  .text(`${i}AM`);
 timeBlock.append(hour);
