@@ -19,3 +19,9 @@ var hour = $("<div>")
   .addClass("col-2 col-md-1 hour text-center py-3")
   .text(`${i}AM`);
 timeBlock.append(hour);
+
+//Create description element
+var description = $("<textarea>")
+  .addClass("col-8 col-md-10 description")
+  .attr("rows", "3");
+timeBlock.append(description);
