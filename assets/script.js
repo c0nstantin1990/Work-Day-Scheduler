@@ -13,3 +13,7 @@ if (i < currentHour) {
 } else {
   timeBlock.addClass("future");
 }
+
+//Create hour element
+var hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${i}AM`)
+timeBlock.append(hour);
