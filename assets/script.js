@@ -26,4 +26,12 @@ var description = $("<textarea>")
   .attr("rows", "3");
 timeBlock.append(description);
 
+//Creating save button element
+var saveBtn = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save");
+var saveIcon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
+saveBtn.append(saveIcon);
+timeBlock.append(saveBtn);
+
+//Adding time-block element container
+$(".container-lg").append(timeBlock);
 
