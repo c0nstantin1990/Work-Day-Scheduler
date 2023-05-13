@@ -25,4 +25,5 @@ Website Link: https://c0nstantin1990.github.io/Work-Day-Scheduler/
 
 ## Credits
 
+Used starter html & css
 Used examples from UNCC textbook & mini project to creare functions, calls & jQuery for documentation (prepend & etc.)
