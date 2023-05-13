@@ -29,6 +29,9 @@ $(document).ready(function () {
 var $hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3");
 $hour.text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
 
+//creating the description textarea element
+var $description = $("<textarea>").addClass("col-8 col-md-10 description").attr("rows", 3);
+
   // Save user input to local storage when button clicked
   $(".saveBtn").on("click", function () {
     var input = $(this).siblings(".description").val().trim();
