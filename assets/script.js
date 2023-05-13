@@ -7,10 +7,14 @@ const startHour = 9;
 const endHour = 17;
 //Getting container element
 const container = $(".container-lg");
+//Creating message element
+const $message = $("<div>").addClass("message py-3 text-center").hide();
+//Appending message to container
+container.prepend($message);
 //Looping through each hour
 for (let i = startHour; i <= endHour; i++) {
   //Creating new row element
-  const $row = $("<div>").addClass("row time-block");
+  var $row = $("<div>").addClass("row time-block");
   //Setting id based on hour
   $row.attr("id", `hour-${i}`);
   //Checking if hour is current, past or future
@@ -40,6 +44,10 @@ for (let i = startHour; i <= endHour; i++) {
   $saveBtn.on("click", function () {
     var descriptionText = $description.val().trim();
     localStorage.setItem(`${i}`, descriptionText);
+    $message.text("Added to Local Storage!").show();
+    setTimeout(function () {
+      $message.text("").hide();
+    }, 2000);
   });
   //Setting value to corresponding value
   $description.val(localStorage.getItem(`${i}`) || "");
