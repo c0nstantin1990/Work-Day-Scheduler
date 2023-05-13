@@ -41,10 +41,11 @@ for (let i = startHour; i <= endHour; i++) {
     var descriptionText = $description.val().trim();
     localStorage.setItem(`${i}`, descriptionText);
   });
+  //Setting value to corresponding value
+  $description.val(localStorage.getItem(`${i}`) || "");
+  //Appending elements to rows
+  $row.append($hour, $description, $saveBtn);
 
-  $row.append($hour);
-  $row.append($description);
-  $row.append($saveBtn);
-
+  //Appending row to container
   container.append($row);
 }
