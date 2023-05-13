@@ -2,6 +2,11 @@ $(document).ready(function () {
   // Display current day & time in header
   $("#currentDay").text(dayjs().format("dddd, MMMM D"));
 
+  var startHour = 9;
+  var endHour = 17;
+
+  var container = $(".container-lg")
+
   // Looping through each time block and update its color based on the current time
   $(".time-block").each(function () {
     var currentHour = dayjs().hour();
