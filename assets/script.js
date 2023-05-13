@@ -1,20 +1,20 @@
-$(document).ready(function () {
-  // Display current day & time in header
-  $("#currentDay").text(dayjs().format("dddd, MMMM D"));
-  var currentHour = dayjs().hour();
-  var startHour = 9;
-  var endHour = 17;
-
-  var container = $(".container-lg");
-
-  // Looping through each time block and update its color based on the current time
-  for (var i = startHour; i <= endHour; i++) {
-    var $row = $("<div>").addClass("row time-block");
-    $row.attr("id", `hour-${i}`);
-  }
-
-  // Determine past, present & future class
-  var status;
+//Adding current day in header
+$("#currentDay").text(dayjs().format("dddd, MMMM D"));
+//Geting current hour using dayjs
+const currentHour = dayjs().hour();
+//Defining start & end hours
+const startHour = 9;
+const endHour = 17;
+//Getting container element
+const container = $(".container-lg");
+//Looping through each hour
+for (let i = startHour; i <= endHour; i++) {
+  //Creating new row element
+  const $row = $("<div>").addClass("row time-block");
+  //Setting id based on hour
+  $row.attr("id", `hour-${i}`);
+  //Checking if hour is current, past or future
+  let status;
   if (i < currentHour) {
     status = "past";
   } else if (i === currentHour) {
@@ -23,36 +23,28 @@ $(document).ready(function () {
     status = "future";
   }
   $row.addClass(status);
-  //Create hour element
-  var $hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3");
-  $hour.text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
-
-  //creating the description textarea element
-  var $description = $("<textarea>")
+  //Creating hour element
+  const $hour = $("<div>")
+    .addClass("col-2 col-md-1 hour text-center py-3")
+    .text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
+  //Creating description textarea element
+  const $description = $("<textarea>")
     .addClass("col-8 col-md-10 description")
     .attr("rows", 3);
-
-  // Creating sve button element
-  var saveBtn = $("<button>")
+  //Creating save button element
+  const $saveBtn = $("<button>")
     .addClass("btn saveBtn col-2 col-md-1")
     .attr("aria-label", "save")
     .html(`<i class="fas fa-save" aria-hidden="true"></i>`);
-
-  // Save user input to local storage when button clicked
-  $(".saveBtn").on("click", function () {
-    var input = $(this).siblings(".description").val().trim();
-    var time = $(this).parent().attr("id");
-
-    localStorage.setItem(time, input);
+  //Adding event listener to save on local storage
+  $saveBtn.on("click", function () {
+    var descriptionText = $description.val().trim();
+    localStorage.setItem(`${i}`, descriptionText);
   });
 
-  // Load saved input from local storage
-  $(".description").each(function () {
-    var time = $(this).parent().attr("id");
-    var input = localStorage.getItem(time);
+  $row.append($hour);
+  $row.append($description);
+  $row.append($saveBtn);
 
-    if (input !== null) {
-      $(this).val(input);
-    }
-  });
-});
+  container.append($row);
+}
