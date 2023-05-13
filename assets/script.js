@@ -1,26 +1,33 @@
 $(document).ready(function () {
   // Display current day & time in header
   $("#currentDay").text(dayjs().format("dddd, MMMM D"));
-
+  var currentHour = dayjs().hour();
   var startHour = 9;
   var endHour = 17;
 
   var container = $(".container-lg")
 
+  
   // Looping through each time block and update its color based on the current time
-  $(".time-block").each(function () {
-    var currentHour = dayjs().hour();
-    var blockHour = parseInt($(this).attr("id").split("-")[1]);
+  for (var i = startHour; i <= endHour; i++) {
+    var $row = $("<div>").addClass("row time-block")
+    $row.attr("id", `hour-${i}`);
+  }
+ 
 
     // Determine past, present & future class
-    if (blockHour < currentHour) {
-      $(this).addClass("past");
-    } else if (blockHour === currentHour) {
-      $(this).addClass("present");
+    var status;
+    if (i < currentHour) {
+      status = "past";
+    } else if (i === currentHour) {
+      status = "present";
     } else {
-      $(this).addClass("future");
+      status = "future";
     }
-  });
+    $row.addClass(status);
+//Create hour element
+var $hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3");
+$hour.text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
 
   // Save user input to local storage when button clicked
   $(".saveBtn").on("click", function () {
