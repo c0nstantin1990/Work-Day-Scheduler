@@ -5,32 +5,38 @@ $(document).ready(function () {
   var startHour = 9;
   var endHour = 17;
 
-  var container = $(".container-lg")
+  var container = $(".container-lg");
 
-  
   // Looping through each time block and update its color based on the current time
   for (var i = startHour; i <= endHour; i++) {
-    var $row = $("<div>").addClass("row time-block")
+    var $row = $("<div>").addClass("row time-block");
     $row.attr("id", `hour-${i}`);
   }
- 
 
-    // Determine past, present & future class
-    var status;
-    if (i < currentHour) {
-      status = "past";
-    } else if (i === currentHour) {
-      status = "present";
-    } else {
-      status = "future";
-    }
-    $row.addClass(status);
-//Create hour element
-var $hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3");
-$hour.text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
+  // Determine past, present & future class
+  var status;
+  if (i < currentHour) {
+    status = "past";
+  } else if (i === currentHour) {
+    status = "present";
+  } else {
+    status = "future";
+  }
+  $row.addClass(status);
+  //Create hour element
+  var $hour = $("<div>").addClass("col-2 col-md-1 hour text-center py-3");
+  $hour.text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
 
-//creating the description textarea element
-var $description = $("<textarea>").addClass("col-8 col-md-10 description").attr("rows", 3);
+  //creating the description textarea element
+  var $description = $("<textarea>")
+    .addClass("col-8 col-md-10 description")
+    .attr("rows", 3);
+
+  // Creating sve button element
+  var saveBtn = $("<button>")
+    .addClass("btn saveBtn col-2 col-md-1")
+    .attr("aria-label", "save")
+    .html(`<i class="fas fa-save" aria-hidden="true"></i>`);
 
   // Save user input to local storage when button clicked
   $(".saveBtn").on("click", function () {
