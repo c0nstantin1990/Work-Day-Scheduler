@@ -42,7 +42,7 @@ for (let i = startHour; i <= endHour; i++) {
     .html(`<i class="fas fa-save" aria-hidden="true"></i>`);
   //Adding event listener to save on local storage
   $saveBtn.on("click", function () {
-    var descriptionText = $description.val().trim();
+    const descriptionText = $description.val().trim();
     localStorage.setItem(`${i}`, descriptionText);
     $message.text("Added to Local Storage!").show();
     setTimeout(function () {
