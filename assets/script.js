@@ -1,15 +1,15 @@
 //Adding current day in header
 $("#currentDay").text(dayjs().format("dddd, MMMM D"));
 //Geting current hour using dayjs
-const currentHour = dayjs().hour();
+var currentHour = dayjs().hour();
 //Defining start & end hours
-const startHour = 9;
-const endHour = 17;
+var startHour = 9;
+var endHour = 17;
 //Getting container element
-const container = $(".container-lg");
+var container = $(".container-lg");
 //Creating message element
-const $message = $("<div>").addClass("message py-3 text-center").hide();
-//Appending message to container
+var $message = $("<div>").addClass("message py-3 text-center").hide();
+//Appending message to container. Inserts message as the first child
 container.prepend($message);
 //Looping through each hour
 for (let i = startHour; i <= endHour; i++) {
@@ -28,7 +28,7 @@ for (let i = startHour; i <= endHour; i++) {
   }
   $row.addClass(status);
   //Creating hour element
-  const $hour = $("<div>")
+  var $hour = $("<div>")
     .addClass("col-2 col-md-1 hour text-center py-3")
     .text(`${i % 12 || 12} ${i < 12 ? "AM" : "PM"}`);
   //Creating description textarea element
@@ -36,13 +36,13 @@ for (let i = startHour; i <= endHour; i++) {
     .addClass("col-8 col-md-10 description")
     .attr("rows", 3);
   //Creating save button element
-  const $saveBtn = $("<button>")
+  var $saveBtn = $("<button>")
     .addClass("btn saveBtn col-2 col-md-1")
     .attr("aria-label", "save")
     .html(`<i class="fas fa-save" aria-hidden="true"></i>`);
   //Adding event listener to save on local storage
   $saveBtn.on("click", function () {
-    const descriptionText = $description.val().trim();
+    var descriptionText = $description.val().trim();
     localStorage.setItem(`${i}`, descriptionText);
     $message.text("Added to Local Storage!").show();
     setTimeout(function () {
