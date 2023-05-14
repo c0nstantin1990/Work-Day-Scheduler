@@ -34,7 +34,8 @@ for (let i = startHour; i <= endHour; i++) {
   //Creating description textarea element
   const $description = $("<textarea>")
     .addClass("col-8 col-md-10 description")
-    .attr("rows", 3);
+  //Adds 2 rows for description
+    .attr("rows", 2);
   //Creating save button element
   var $saveBtn = $("<button>")
     .addClass("btn saveBtn col-2 col-md-1")
